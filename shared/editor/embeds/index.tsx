@@ -7,20 +7,20 @@ import { IntegrationService } from "../../types";
 import type { IntegrationSettings, IntegrationType } from "../../types";
 import { urlRegex } from "../../utils/urls";
 import Image from "../components/Img";
-import Berrycast from "./Berrycast";
-import Diagrams from "./Diagrams";
-import Dropbox from "./Dropbox";
-import Gist from "./Gist";
-import GitLabSnippet from "./GitLabSnippet";
-import InVision from "./InVision";
-import JSFiddle from "./JSFiddle";
-import Linkedin from "./Linkedin";
-import Pinterest from "./Pinterest";
-import Spotify from "./Spotify";
-import Trello from "./Trello";
-import Vimeo from "./Vimeo";
-import YouTube from "./YouTube";
-import PlantUmlDiagrams from "./PlantUml";
+// import Berrycast from "./Berrycast";
+// import Diagrams from "./Diagrams";
+// import Dropbox from "./Dropbox";
+// import Gist from "./Gist";
+// import GitLabSnippet from "./GitLabSnippet";
+// import InVision from "./InVision";
+// import JSFiddle from "./JSFiddle";
+// import Linkedin from "./Linkedin";
+// import Pinterest from "./Pinterest";
+// import Spotify from "./Spotify";
+// import Trello from "./Trello";
+// import Vimeo from "./Vimeo";
+// import YouTube from "./YouTube";
+// import PlantUmlDiagrams from "./PlantUml";
 
 export type EmbedProps = {
   isSelected: boolean;
@@ -32,7 +32,7 @@ export type EmbedProps = {
   };
 };
 
-const Img = styled(Image)<{ $invertable?: boolean }>`
+const Img = styled(Image) <{ $invertable?: boolean }>`
   border-radius: 3px;
   margin: 3px;
   width: 18px;
@@ -134,27 +134,27 @@ export class EmbedDescriptor {
 }
 
 const embeds: EmbedDescriptor[] = [
-  new EmbedDescriptor({
-    id: "airtable",
-    title: "Airtable",
-    keywords: "spreadsheet",
-    icon: <Img src="/images/airtable.png" alt="Airtable" />,
-    regexMatch: [
-      new RegExp("^https://airtable.com/(?:embed/)?(app.*/)?(shr.*)$"),
-      new RegExp("^https://airtable.com/(app.*/)?(pag.*)/form$"),
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://airtable.com/embed/${matches[1] ?? ""}${matches[2]}`,
-  }),
-  new EmbedDescriptor({
-    id: "berrycast",
-    title: "Berrycast",
-    keywords: "video",
-    defaultHidden: true,
-    regexMatch: [/^https:\/\/(www\.)?berrycast.com\/conversations\/(.*)$/i],
-    icon: <Img src="/images/berrycast.png" alt="Berrycast" />,
-    component: Berrycast,
-  }),
+  // new EmbedDescriptor({
+  //   id: "airtable",
+  //   title: "Airtable",
+  //   keywords: "spreadsheet",
+  //   icon: <Img src="/images/airtable.png" alt="Airtable" />,
+  //   regexMatch: [
+  //     new RegExp("^https://airtable.com/(?:embed/)?(app.*/)?(shr.*)$"),
+  //     new RegExp("^https://airtable.com/(app.*/)?(pag.*)/form$"),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://airtable.com/embed/${matches[1] ?? ""}${matches[2]}`,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "berrycast",
+  //   title: "Berrycast",
+  //   keywords: "video",
+  //   defaultHidden: true,
+  //   regexMatch: [/^https:\/\/(www\.)?berrycast.com\/conversations\/(.*)$/i],
+  //   icon: <Img src="/images/berrycast.png" alt="Berrycast" />,
+  //   component: Berrycast,
+  // }),
   new EmbedDescriptor({
     id: "bilibili",
     title: "Bilibili",
@@ -167,51 +167,51 @@ const embeds: EmbedDescriptor[] = [
       `https://player.bilibili.com/player.html?bvid=${matches[2]}&page=1&high_quality=1&autoplay=0`,
     icon: <Img src="/images/bilibili.png" alt="Bilibili" />,
   }),
-  new EmbedDescriptor({
-    id: "camunda",
-    title: "Camunda Modeler",
-    keywords: "bpmn process cawemo",
-    defaultHidden: true,
-    regexMatch: [
-      new RegExp("^https?://modeler.cloud.camunda.io/(?:share|embed)/(.*)$"),
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://modeler.cloud.camunda.io/embed/${matches[1]}`,
-    icon: <Img src="/images/camunda.png" alt="Camunda" />,
-  }),
-  new EmbedDescriptor({
-    id: "canva",
-    title: "Canva",
-    keywords: "design",
-    regexMatch: [
-      /^https:\/\/(?:www\.)?canva\.com\/design\/([\/a-zA-Z0-9_\-]*)$/,
-    ],
-    transformMatch: (matches: RegExpMatchArray) => {
-      const input = matches.input ?? matches[0];
+  // new EmbedDescriptor({
+  //   id: "camunda",
+  //   title: "Camunda Modeler",
+  //   keywords: "bpmn process cawemo",
+  //   defaultHidden: true,
+  //   regexMatch: [
+  //     new RegExp("^https?://modeler.cloud.camunda.io/(?:share|embed)/(.*)$"),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://modeler.cloud.camunda.io/embed/${matches[1]}`,
+  //   icon: <Img src="/images/camunda.png" alt="Camunda" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "canva",
+  //   title: "Canva",
+  //   keywords: "design",
+  //   regexMatch: [
+  //     /^https:\/\/(?:www\.)?canva\.com\/design\/([\/a-zA-Z0-9_\-]*)$/,
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => {
+  //     const input = matches.input ?? matches[0];
 
-      try {
-        const url = new URL(input);
-        const params = new URLSearchParams(url.search);
-        params.append("embed", "");
-        return `${url.origin}${url.pathname}?${params.toString()}`;
-      } catch (_err) {
-        // Ignore
-      }
+  //     try {
+  //       const url = new URL(input);
+  //       const params = new URLSearchParams(url.search);
+  //       params.append("embed", "");
+  //       return `${url.origin}${url.pathname}?${params.toString()}`;
+  //     } catch (_err) {
+  //       // Ignore
+  //     }
 
-      return input;
-    },
-    icon: <Img src="/images/canva.png" alt="Canva" />,
-  }),
-  new EmbedDescriptor({
-    id: "cawemo",
-    title: "Cawemo",
-    keywords: "bpmn process",
-    defaultHidden: true,
-    regexMatch: [new RegExp("^https?://cawemo.com/(?:share|embed)/(.*)$")],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://cawemo.com/embed/${matches[1]}`,
-    icon: <Img src="/images/cawemo.png" alt="Cawemo" />,
-  }),
+  //     return input;
+  //   },
+  //   icon: <Img src="/images/canva.png" alt="Canva" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "cawemo",
+  //   title: "Cawemo",
+  //   keywords: "bpmn process",
+  //   defaultHidden: true,
+  //   regexMatch: [new RegExp("^https?://cawemo.com/(?:share|embed)/(.*)$")],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://cawemo.com/embed/${matches[1]}`,
+  //   icon: <Img src="/images/cawemo.png" alt="Cawemo" />,
+  // }),
   new EmbedDescriptor({
     id: "clickup",
     title: "ClickUp",
@@ -225,56 +225,56 @@ const embeds: EmbedDescriptor[] = [
     transformMatch: (matches: RegExpMatchArray) => matches[0],
     icon: <Img src="/images/clickup.png" alt="ClickUp" />,
   }),
-  new EmbedDescriptor({
-    id: "codepen",
-    title: "Codepen",
-    keywords: "code editor",
-    regexMatch: [new RegExp("^https://codepen.io/(.*?)/(pen|embed)/(.*)$")],
-    transformMatch: (matches) =>
-      `https://codepen.io/${matches[1]}/embed/${matches[3]}`,
-    icon: <Img src="/images/codepen.png" alt="Codepen" $invertable />,
-  }),
-  new EmbedDescriptor({
-    id: "dbdiagram",
-    title: "DBDiagram",
-    keywords: "diagrams database",
-    regexMatch: [new RegExp("^https://dbdiagram.io/(embed|e|d)/(\\w+)(/.*)?$")],
-    transformMatch: (matches) => `https://dbdiagram.io/embed/${matches[2]}`,
-    icon: <Img src="/images/dbdiagram.png" alt="DBDiagram" />,
-  }),
-  new EmbedDescriptor({
-    id: "diagrams",
-    title: "Diagrams.net",
-    name: IntegrationService.Diagrams,
-    keywords: "diagrams drawio",
-    regexMatch: [/^https:\/\/viewer\.diagrams\.net\/(?!proxy).*(title=\\w+)?/],
-    icon: <Img src="/images/diagrams.png" alt="Diagrams.net" />,
-    component: Diagrams,
-    visible: false,
-  }),
-  new EmbedDescriptor({
-    id: "descript",
-    title: "Descript",
-    keywords: "audio",
-    regexMatch: [new RegExp("^https?://share\\.descript\\.com/view/(\\w+)$")],
-    transformMatch: (matches) =>
-      `https://share.descript.com/embed/${matches[1]}`,
-    icon: <Img src="/images/descript.png" alt="Descript" />,
-  }),
-  ...(env.DROPBOX_APP_KEY
-    ? [
-        new EmbedDescriptor({
-          id: "dropbox",
-          title: "Dropbox",
-          keywords: "file document",
-          regexMatch: [
-            new RegExp("^https?://(www.)?dropbox.com/(s|scl)/(.*)$"),
-          ],
-          icon: <Img src="/images/dropbox.png" alt="Dropbox" />,
-          component: Dropbox,
-        }),
-      ]
-    : []),
+  // new EmbedDescriptor({
+  //   id: "codepen",
+  //   title: "Codepen",
+  //   keywords: "code editor",
+  //   regexMatch: [new RegExp("^https://codepen.io/(.*?)/(pen|embed)/(.*)$")],
+  //   transformMatch: (matches) =>
+  //     `https://codepen.io/${matches[1]}/embed/${matches[3]}`,
+  //   icon: <Img src="/images/codepen.png" alt="Codepen" $invertable />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "dbdiagram",
+  //   title: "DBDiagram",
+  //   keywords: "diagrams database",
+  //   regexMatch: [new RegExp("^https://dbdiagram.io/(embed|e|d)/(\\w+)(/.*)?$")],
+  //   transformMatch: (matches) => `https://dbdiagram.io/embed/${matches[2]}`,
+  //   icon: <Img src="/images/dbdiagram.png" alt="DBDiagram" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "diagrams",
+  //   title: "Diagrams.net",
+  //   name: IntegrationService.Diagrams,
+  //   keywords: "diagrams drawio",
+  //   regexMatch: [/^https:\/\/viewer\.diagrams\.net\/(?!proxy).*(title=\\w+)?/],
+  //   icon: <Img src="/images/diagrams.png" alt="Diagrams.net" />,
+  //   component: Diagrams,
+  //   visible: false,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "descript",
+  //   title: "Descript",
+  //   keywords: "audio",
+  //   regexMatch: [new RegExp("^https?://share\\.descript\\.com/view/(\\w+)$")],
+  //   transformMatch: (matches) =>
+  //     `https://share.descript.com/embed/${matches[1]}`,
+  //   icon: <Img src="/images/descript.png" alt="Descript" />,
+  // }),
+  // ...(env.DROPBOX_APP_KEY
+  //   ? [
+  //     new EmbedDescriptor({
+  //       id: "dropbox",
+  //       title: "Dropbox",
+  //       keywords: "file document",
+  //       regexMatch: [
+  //         new RegExp("^https?://(www.)?dropbox.com/(s|scl)/(.*)$"),
+  //       ],
+  //       icon: <Img src="/images/dropbox.png" alt="Dropbox" />,
+  //       component: Dropbox,
+  //     }),
+  //   ]
+  //   : []),
   new EmbedDescriptor({
     id: "figma",
     title: "Figma",
@@ -296,444 +296,444 @@ const embeds: EmbedDescriptor[] = [
     },
     icon: <Img src="/images/figma.png" alt="Figma" />,
   }),
-  new EmbedDescriptor({
-    id: "framer",
-    title: "Framer",
-    keywords: "design prototyping",
-    regexMatch: [new RegExp("^https://framer.cloud/(.*)$")],
-    transformMatch: (matches) => matches[0],
-    icon: <Img src="/images/framer.png" alt="Framer" $invertable />,
-  }),
-  new EmbedDescriptor({
-    id: "github-gist",
-    title: "GitHub Gist",
-    keywords: "code",
-    regexMatch: [
-      new RegExp(
-        "^https://gist\\.github\\.com/([a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38})/(.*)$"
-      ),
-    ],
-    icon: <Img src="/images/github-gist.png" alt="GitHub" $invertable />,
-    component: Gist,
-  }),
-  new EmbedDescriptor({
-    id: "gitlab-snippet",
-    title: "GitLab Snippet",
-    keywords: "code",
-    regexMatch: [
-      new RegExp(`^https://gitlab\\.com/(([a-zA-Z\\d-]+)/)*-/snippets/\\d+$`),
-    ],
-    icon: <Img src="/images/gitlab.png" alt="GitLab" />,
-    component: GitLabSnippet,
-  }),
-  new EmbedDescriptor({
-    id: "gliffy",
-    title: "Gliffy",
-    keywords: "diagram",
-    regexMatch: [new RegExp("https?://go\\.gliffy\\.com/go/share/(.*)$")],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/gliffy.png" alt="Gliffy" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-maps",
-    title: "Google Maps",
-    keywords: "maps",
-    regexMatch: [new RegExp("^https?://www\\.google\\.com/maps/embed\\?(.*)$")],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/google-maps.png" alt="Google Maps" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-drawings",
-    title: "Google Drawings",
-    keywords: "drawings",
-    transformMatch: (matches: RegExpMatchArray) =>
-      matches[0].replace("/edit", "/preview"),
-    regexMatch: [
-      new RegExp(
-        "^https://docs\\.google\\.com/drawings/d/(.*)/(edit|preview)(.*)$"
-      ),
-    ],
-    icon: <Img src="/images/google-drawings.png" alt="Google Drawings" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-drive",
-    title: "Google Drive",
-    keywords: "drive",
-    regexMatch: [new RegExp("^https?://drive\\.google\\.com/file/d/(.*)$")],
-    transformMatch: (matches) =>
-      matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
-    icon: <Img src="/images/google-drive.png" alt="Google Drive" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-docs",
-    title: "Google Docs",
-    keywords: "documents word",
-    regexMatch: [new RegExp("^https?://docs\\.google\\.com/document/(.*)$")],
-    transformMatch: (matches) =>
-      matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
-    icon: <Img src="/images/google-docs.png" alt="Google Docs" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-sheets",
-    title: "Google Sheets",
-    keywords: "excel spreadsheet",
-    regexMatch: [
-      new RegExp("^https?://docs\\.google\\.com/spreadsheets/d/(.*)$"),
-    ],
-    transformMatch: (matches) =>
-      matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
-    icon: <Img src="/images/google-sheets.png" alt="Google Sheets" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-slides",
-    title: "Google Slides",
-    keywords: "presentation slideshow",
-    regexMatch: [
-      new RegExp("^https?://docs\\.google\\.com/presentation/d/(.*)$"),
-    ],
-    transformMatch: (matches) =>
-      matches[0].replace("/edit", "/preview").replace("/pub", "/embed"),
-    icon: <Img src="/images/google-slides.png" alt="Google Slides" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-calendar",
-    title: "Google Calendar",
-    keywords: "calendar",
-    regexMatch: [
-      new RegExp(
-        "^https?://calendar\\.google\\.com/calendar/embed\\?src=(.*)$"
-      ),
-    ],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/google-calendar.png" alt="Google Calendar" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-forms",
-    title: "Google Forms",
-    keywords: "form survey",
-    regexMatch: [new RegExp("^https?://docs\\.google\\.com/forms/d/(.+)$")],
-    transformMatch: (matches: RegExpMatchArray) =>
-      matches[0].replace(
-        /\/(edit|viewform)(\?.+)?$/,
-        "/viewform?embedded=true"
-      ),
-    icon: <Img src="/images/google-forms.png" alt="Google Forms" />,
-  }),
-  new EmbedDescriptor({
-    id: "google-looker-studio",
-    title: "Google Looker Studio",
-    keywords: "bi business intelligence",
-    regexMatch: [
-      new RegExp(
-        "^https?://(lookerstudio|datastudio)\\.google\\.com/(embed|u/0)/reporting/(.*)/page/(.*)(/edit)?$"
-      ),
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      matches[0].replace("u/0", "embed").replace("/edit", ""),
-    icon: (
-      <Img src="/images/google-lookerstudio.png" alt="Google Looker Studio" />
-    ),
-  }),
-  new EmbedDescriptor({
-    id: "grist",
-    title: "Grist",
-    name: IntegrationService.Grist,
-    keywords: "spreadsheet",
-    regexMatch: [new RegExp("^https?://([a-z.-]+\\.)?getgrist\\.com/(.+)$")],
-    transformMatch: (matches: RegExpMatchArray) => {
-      const input = matches.input ?? matches[0];
+  // new EmbedDescriptor({
+  //   id: "framer",
+  //   title: "Framer",
+  //   keywords: "design prototyping",
+  //   regexMatch: [new RegExp("^https://framer.cloud/(.*)$")],
+  //   transformMatch: (matches) => matches[0],
+  //   icon: <Img src="/images/framer.png" alt="Framer" $invertable />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "github-gist",
+  //   title: "GitHub Gist",
+  //   keywords: "code",
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https://gist\\.github\\.com/([a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38})/(.*)$"
+  //     ),
+  //   ],
+  //   icon: <Img src="/images/github-gist.png" alt="GitHub" $invertable />,
+  //   component: Gist,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "gitlab-snippet",
+  //   title: "GitLab Snippet",
+  //   keywords: "code",
+  //   regexMatch: [
+  //     new RegExp(`^https://gitlab\\.com/(([a-zA-Z\\d-]+)/)*-/snippets/\\d+$`),
+  //   ],
+  //   icon: <Img src="/images/gitlab.png" alt="GitLab" />,
+  //   component: GitLabSnippet,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "gliffy",
+  //   title: "Gliffy",
+  //   keywords: "diagram",
+  //   regexMatch: [new RegExp("https?://go\\.gliffy\\.com/go/share/(.*)$")],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/gliffy.png" alt="Gliffy" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-maps",
+  //   title: "Google Maps",
+  //   keywords: "maps",
+  //   regexMatch: [new RegExp("^https?://www\\.google\\.com/maps/embed\\?(.*)$")],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/google-maps.png" alt="Google Maps" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-drawings",
+  //   title: "Google Drawings",
+  //   keywords: "drawings",
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     matches[0].replace("/edit", "/preview"),
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https://docs\\.google\\.com/drawings/d/(.*)/(edit|preview)(.*)$"
+  //     ),
+  //   ],
+  //   icon: <Img src="/images/google-drawings.png" alt="Google Drawings" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-drive",
+  //   title: "Google Drive",
+  //   keywords: "drive",
+  //   regexMatch: [new RegExp("^https?://drive\\.google\\.com/file/d/(.*)$")],
+  //   transformMatch: (matches) =>
+  //     matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
+  //   icon: <Img src="/images/google-drive.png" alt="Google Drive" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-docs",
+  //   title: "Google Docs",
+  //   keywords: "documents word",
+  //   regexMatch: [new RegExp("^https?://docs\\.google\\.com/document/(.*)$")],
+  //   transformMatch: (matches) =>
+  //     matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
+  //   icon: <Img src="/images/google-docs.png" alt="Google Docs" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-sheets",
+  //   title: "Google Sheets",
+  //   keywords: "excel spreadsheet",
+  //   regexMatch: [
+  //     new RegExp("^https?://docs\\.google\\.com/spreadsheets/d/(.*)$"),
+  //   ],
+  //   transformMatch: (matches) =>
+  //     matches[0].replace("/view", "/preview").replace("/edit", "/preview"),
+  //   icon: <Img src="/images/google-sheets.png" alt="Google Sheets" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-slides",
+  //   title: "Google Slides",
+  //   keywords: "presentation slideshow",
+  //   regexMatch: [
+  //     new RegExp("^https?://docs\\.google\\.com/presentation/d/(.*)$"),
+  //   ],
+  //   transformMatch: (matches) =>
+  //     matches[0].replace("/edit", "/preview").replace("/pub", "/embed"),
+  //   icon: <Img src="/images/google-slides.png" alt="Google Slides" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-calendar",
+  //   title: "Google Calendar",
+  //   keywords: "calendar",
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https?://calendar\\.google\\.com/calendar/embed\\?src=(.*)$"
+  //     ),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/google-calendar.png" alt="Google Calendar" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-forms",
+  //   title: "Google Forms",
+  //   keywords: "form survey",
+  //   regexMatch: [new RegExp("^https?://docs\\.google\\.com/forms/d/(.+)$")],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     matches[0].replace(
+  //       /\/(edit|viewform)(\?.+)?$/,
+  //       "/viewform?embedded=true"
+  //     ),
+  //   icon: <Img src="/images/google-forms.png" alt="Google Forms" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "google-looker-studio",
+  //   title: "Google Looker Studio",
+  //   keywords: "bi business intelligence",
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https?://(lookerstudio|datastudio)\\.google\\.com/(embed|u/0)/reporting/(.*)/page/(.*)(/edit)?$"
+  //     ),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     matches[0].replace("u/0", "embed").replace("/edit", ""),
+  //   icon: (
+  //     <Img src="/images/google-lookerstudio.png" alt="Google Looker Studio" />
+  //   ),
+  // }),
+  // new EmbedDescriptor({
+  //   id: "grist",
+  //   title: "Grist",
+  //   name: IntegrationService.Grist,
+  //   keywords: "spreadsheet",
+  //   regexMatch: [new RegExp("^https?://([a-z.-]+\\.)?getgrist\\.com/(.+)$")],
+  //   transformMatch: (matches: RegExpMatchArray) => {
+  //     const input = matches.input ?? matches[0];
 
-      try {
-        const url = new URL(input);
-        const params = new URLSearchParams(url.search);
-        if (params.has("embed") || params.get("style") === "singlePage") {
-          return input;
-        }
+  //     try {
+  //       const url = new URL(input);
+  //       const params = new URLSearchParams(url.search);
+  //       if (params.has("embed") || params.get("style") === "singlePage") {
+  //         return input;
+  //       }
 
-        params.append("embed", "true");
-        return `${url.origin}${url.pathname}?${params.toString()}`;
-      } catch (_err) {
-        // Ignore
-      }
+  //       params.append("embed", "true");
+  //       return `${url.origin}${url.pathname}?${params.toString()}`;
+  //     } catch (_err) {
+  //       // Ignore
+  //     }
 
-      return input;
-    },
-    icon: <Img src="/images/grist.png" alt="Grist" />,
-  }),
-  new EmbedDescriptor({
-    id: "instagram",
-    title: "Instagram",
-    keywords: "post",
-    regexMatch: [
-      /^https?:\/\/www\.instagram\.com\/(p|reel)\/([\w-]+)(\/?utm_source=\w+)?/,
-    ],
-    transformMatch: (matches: RegExpMatchArray) => `${matches[0]}/embed`,
-    icon: <Img src="/images/instagram.png" alt="Instagram" />,
-  }),
-  new EmbedDescriptor({
-    id: "invision",
-    title: "InVision",
-    keywords: "design prototype",
-    defaultHidden: true,
-    visible: false,
-    regexMatch: [
-      /^https:\/\/(invis\.io\/.*)|(projects\.invisionapp\.com\/share\/.*)$/,
-      /^https:\/\/(opal\.invisionapp\.com\/static-signed\/live-embed\/.*)$/,
-    ],
-    icon: <Img src="/images/invision.png" alt="InVision" />,
-    component: InVision,
-  }),
-  new EmbedDescriptor({
-    id: "jsfiddle",
-    title: "JSFiddle",
-    keywords: "code",
-    defaultHidden: true,
-    regexMatch: [new RegExp("^https?://jsfiddle\\.net/(.*)/(.*)$")],
-    icon: <Img src="/images/jsfiddle.png" alt="JSFiddle" $invertable />,
-    component: JSFiddle,
-  }),
-  new EmbedDescriptor({
-    id: "linkedin",
-    title: "LinkedIn",
-    keywords: "post",
-    defaultHidden: true,
-    regexMatch: [
-      /^https:\/\/www\.linkedin\.com\/(?:posts\/.*-(ugcPost|activity)-(\d+)-.*|(embed)\/(?:feed\/update\/urn:li:(?:ugcPost|share):(?:\d+)))/,
-    ],
-    icon: <Img src="/images/linkedin.png" alt="LinkedIn" />,
-    component: Linkedin,
-  }),
-  new EmbedDescriptor({
-    id: "loom",
-    title: "Loom",
-    keywords: "video screencast",
-    regexMatch: [/^https:\/\/(www\.)?(use)?loom\.com\/(embed|share)\/(.*)$/],
-    transformMatch: (matches: RegExpMatchArray) =>
-      matches[0].replace("share", "embed"),
-    icon: <Img src="/images/loom.png" alt="Loom" />,
-  }),
-  new EmbedDescriptor({
-    id: "lucidchart",
-    title: "Lucidchart",
-    keywords: "chart",
-    regexMatch: [
-      /^https?:\/\/(www\.|app\.)?(lucidchart\.com|lucid\.app)\/documents\/(embeddedchart|view|edit)\/(?<chartId>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})(?:.*)?$/,
-      /^https?:\/\/(www\.|app\.)?(lucid\.app|lucidchart\.com)\/lucidchart\/(?<chartId>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\/(embeddedchart|view|edit)(?:.*)?$/,
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://lucidchart.com/documents/embeddedchart/${matches.groups?.chartId}`,
-    icon: <Img src="/images/lucidchart.png" alt="Lucidchart" />,
-  }),
-  new EmbedDescriptor({
-    id: "marvel",
-    title: "Marvel",
-    keywords: "design prototype",
-    regexMatch: [new RegExp("^https://marvelapp\\.com/([A-Za-z0-9-]{6})/?$")],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/marvel.png" alt="Marvel" />,
-  }),
-  new EmbedDescriptor({
-    id: "mindmeister",
-    title: "Mindmeister",
-    keywords: "mindmap",
-    regexMatch: [
-      new RegExp(
-        "^https://([w.-]+\\.)?(mindmeister\\.com|mm\\.tt)(/maps/public_map_shell)?/(\\d+)(\\?t=.*)?(/.*)?$"
-      ),
-    ],
-    transformMatch: (matches: RegExpMatchArray) => {
-      const chartId = matches[4] + (matches[5] || "") + (matches[6] || "");
-      return `https://www.mindmeister.com/maps/public_map_shell/${chartId}`;
-    },
-    icon: <Img src="/images/mindmeister.png" alt="Mindmeister" />,
-  }),
-  new EmbedDescriptor({
-    id: "miro",
-    title: "Miro",
-    keywords: "whiteboard",
-    regexMatch: [/^https:\/\/(realtimeboard|miro)\.com\/app\/board\/(.*)$/],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://${matches[1]}.com/app/embed/${matches[2]}`,
-    icon: <Img src="/images/miro.png" alt="Miro" />,
-  }),
-  new EmbedDescriptor({
-    id: "mode",
-    title: "Mode",
-    keywords: "analytics",
-    defaultHidden: true,
-    regexMatch: [
-      new RegExp("^https://([w.-]+\\.)?modeanalytics\\.com/(.*)/reports/(.*)$"),
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `${matches[0].replace(/\/embed$/, "")}/embed`,
-    icon: <Img src="/images/mode-analytics.png" alt="Mode" />,
-  }),
-  new EmbedDescriptor({
-    id: "otter",
-    title: "Otter.ai",
-    keywords: "audio transcription meeting notes",
-    defaultHidden: true,
-    regexMatch: [new RegExp("^https?://otter\\.ai/[su]/(.*)$")],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/otter.png" alt="Otter.ai" />,
-  }),
-  new EmbedDescriptor({
-    id: "pitch",
-    title: "Pitch",
-    keywords: "presentation",
-    defaultHidden: true,
-    regexMatch: [
-      new RegExp(
-        "^https?://app\\.pitch\\.com/app/(?:presentation/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|public/player)/(.*)$"
-      ),
-      new RegExp("^https?://pitch\\.com/embed/(.*)$"),
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://pitch.com/embed/${matches[1]}`,
-    icon: <Img src="/images/pitch.png" alt="Pitch" />,
-  }),
-  new EmbedDescriptor({
-    id: "prezi",
-    title: "Prezi",
-    keywords: "presentation",
-    regexMatch: [new RegExp("^https://prezi\\.com/view/(.*)$")],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `${matches[0].replace(/\/embed$/, "")}/embed`,
-    icon: <Img src="/images/prezi.png" alt="Prezi" />,
-  }),
-  new EmbedDescriptor({
-    id: "scribe",
-    title: "Scribe",
-    keywords: "screencast",
-    regexMatch: [/^https?:\/\/scribehow\.com\/shared\/(.*)$/],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://scribehow.com/embed/${matches[1]}`,
-    icon: <Img src="/images/scribe.png" alt="Scribe" />,
-  }),
-  new EmbedDescriptor({
-    id: "smartsuite",
-    title: "SmartSuite",
-    regexMatch: [
-      new RegExp("^https?://app\\.smartsuite\\.com/shared/(.*)(?:\\?)?(?:.*)$"),
-    ],
-    icon: <Img src="/images/smartsuite.png" alt="SmartSuite" />,
-    defaultHidden: true,
-    hideToolbar: true,
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://app.smartsuite.com/shared/${matches[1]}?embed=true&header=false&toolbar=true`,
-  }),
-  new EmbedDescriptor({
-    id: "spotify",
-    title: "Spotify",
-    keywords: "music",
-    regexMatch: [new RegExp("^https?://open\\.spotify\\.com/(.*)$")],
-    icon: <Img src="/images/spotify.png" alt="Spotify" />,
-    component: Spotify,
-  }),
-  new EmbedDescriptor({
-    id: "tella",
-    title: "Tella",
-    keywords: "video",
-    regexMatch: [/^https?:\/\/(?:www\.)?tella\.tv\/video\/([^\/]+)(?:.*)?$/],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://www.tella.tv/video/${matches[1]}/embed?b=0&title=1&a=0&loop=0&t=0&muted=0&wt=1`,
-    icon: <Img src="/images/tella.png" alt="Tella" />,
-    defaultHidden: true,
-    hideToolbar: true,
-  }),
-  new EmbedDescriptor({
-    id: "tldraw",
-    title: "Tldraw",
-    keywords: "draw schematics diagrams",
-    regexMatch: [
-      new RegExp("^https?://(beta|www|old)\\.tldraw\\.com/[rsvopf]+/(.*)"),
-    ],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/tldraw.png" alt="Tldraw" $invertable />,
-  }),
-  new EmbedDescriptor({
-    id: "trello",
-    title: "Trello",
-    keywords: "kanban",
-    regexMatch: [/^https:\/\/trello\.com\/(c|b)\/([^/]*)(.*)?$/],
-    icon: <Img src="/images/trello.png" alt="Trello" />,
-    component: Trello,
-  }),
-  new EmbedDescriptor({
-    id: "typeform",
-    title: "Typeform",
-    keywords: "form survey",
-    regexMatch: [
-      new RegExp(
-        "^https://([A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)\\.typeform\\.com/to/(.*)$"
-      ),
-    ],
-    transformMatch: (matches: RegExpMatchArray) => matches[0],
-    icon: <Img src="/images/typeform.png" alt="Typeform" $invertable />,
-  }),
-  new EmbedDescriptor({
-    id: "valtown",
-    title: "Valtown",
-    keywords: "code",
-    regexMatch: [/^https?:\/\/(?:www.)?val\.town\/(?:v|embed)\/(.*)$/],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://www.val.town/embed/${matches[1]}`,
-    icon: <Img src="/images/valtown.png" alt="Valtown" $invertable />,
-  }),
-  new EmbedDescriptor({
-    id: "vimeo",
-    title: "Vimeo",
-    keywords: "video",
-    regexMatch: [
-      /(http|https)?:\/\/(www\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^/]*)\/videos\/|)(\d+)(?:\/|\?)?([\d\w]+)?/,
-    ],
-    icon: <Img src="/images/vimeo.png" alt="Vimeo" />,
-    component: Vimeo,
-  }),
-  new EmbedDescriptor({
-    id: "pinterest",
-    title: "Pinterest",
-    keywords: "board moodboard pins",
-    regexMatch: [
-      // Match board URLs but exclude pins
-      /^(?:https?:\/\/)?(?:(?:www\.|[a-z]{2}\.)?pinterest\.(?:com|[a-z]{2,3}))\/(?!pin\/)([^/]+)\/([^/]+)\/?$/,
-      // Match profile URLs but exclude pins
-      /^(?:https?:\/\/)?(?:(?:www\.|[a-z]{2}\.)?pinterest\.(?:com|[a-z]{2,3}))\/(?!pin\/)([^/]+)\/?$/,
-    ],
-    icon: <Img src="/images/pinterest.png" alt="Pinterest" />,
-    component: Pinterest,
-  }),
-  new EmbedDescriptor({
-    id: "whimsical",
-    title: "Whimsical",
-    keywords: "whiteboard",
-    regexMatch: [
-      /^https?:\/\/whimsical\.com\/[0-9a-zA-Z-_~]*-([a-zA-Z0-9]+)\/?$/,
-    ],
-    transformMatch: (matches: RegExpMatchArray) =>
-      `https://whimsical.com/embed/${matches[1]}`,
-    icon: <Img src="/images/whimsical.png" alt="Whimsical" />,
-  }),
-  new EmbedDescriptor({
-    id: "youtube",
-    title: "YouTube",
-    keywords: "google video",
-    regexMatch: [
-      /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([a-zA-Z0-9_-]{11})([\&\?](.*))?$/i,
-    ],
-    icon: <Img src="/images/youtube.png" alt="YouTube" />,
-    component: YouTube,
-  }),
-  new EmbedDescriptor({
-    id: "plant-uml",
-    title: "Plant UML",
-    keywords: "plant plantuml uml",
-    regexMatch: [
-      /(?:https?:\/\/)?(?:www\.)?editor\.plantuml\.com\/uml\/([a-zA-Z0-9\-_]+)([\&\?].*)?$/i,
-    ],
-    icon: <Img src="/images/plantuml.png" alt="PlantUml" />,
-    component: PlantUmlDiagrams,
-  }),
+  //     return input;
+  //   },
+  //   icon: <Img src="/images/grist.png" alt="Grist" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "instagram",
+  //   title: "Instagram",
+  //   keywords: "post",
+  //   regexMatch: [
+  //     /^https?:\/\/www\.instagram\.com\/(p|reel)\/([\w-]+)(\/?utm_source=\w+)?/,
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => `${matches[0]}/embed`,
+  //   icon: <Img src="/images/instagram.png" alt="Instagram" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "invision",
+  //   title: "InVision",
+  //   keywords: "design prototype",
+  //   defaultHidden: true,
+  //   visible: false,
+  //   regexMatch: [
+  //     /^https:\/\/(invis\.io\/.*)|(projects\.invisionapp\.com\/share\/.*)$/,
+  //     /^https:\/\/(opal\.invisionapp\.com\/static-signed\/live-embed\/.*)$/,
+  //   ],
+  //   icon: <Img src="/images/invision.png" alt="InVision" />,
+  //   component: InVision,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "jsfiddle",
+  //   title: "JSFiddle",
+  //   keywords: "code",
+  //   defaultHidden: true,
+  //   regexMatch: [new RegExp("^https?://jsfiddle\\.net/(.*)/(.*)$")],
+  //   icon: <Img src="/images/jsfiddle.png" alt="JSFiddle" $invertable />,
+  //   component: JSFiddle,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "linkedin",
+  //   title: "LinkedIn",
+  //   keywords: "post",
+  //   defaultHidden: true,
+  //   regexMatch: [
+  //     /^https:\/\/www\.linkedin\.com\/(?:posts\/.*-(ugcPost|activity)-(\d+)-.*|(embed)\/(?:feed\/update\/urn:li:(?:ugcPost|share):(?:\d+)))/,
+  //   ],
+  //   icon: <Img src="/images/linkedin.png" alt="LinkedIn" />,
+  //   component: Linkedin,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "loom",
+  //   title: "Loom",
+  //   keywords: "video screencast",
+  //   regexMatch: [/^https:\/\/(www\.)?(use)?loom\.com\/(embed|share)\/(.*)$/],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     matches[0].replace("share", "embed"),
+  //   icon: <Img src="/images/loom.png" alt="Loom" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "lucidchart",
+  //   title: "Lucidchart",
+  //   keywords: "chart",
+  //   regexMatch: [
+  //     /^https?:\/\/(www\.|app\.)?(lucidchart\.com|lucid\.app)\/documents\/(embeddedchart|view|edit)\/(?<chartId>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})(?:.*)?$/,
+  //     /^https?:\/\/(www\.|app\.)?(lucid\.app|lucidchart\.com)\/lucidchart\/(?<chartId>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\/(embeddedchart|view|edit)(?:.*)?$/,
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://lucidchart.com/documents/embeddedchart/${matches.groups?.chartId}`,
+  //   icon: <Img src="/images/lucidchart.png" alt="Lucidchart" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "marvel",
+  //   title: "Marvel",
+  //   keywords: "design prototype",
+  //   regexMatch: [new RegExp("^https://marvelapp\\.com/([A-Za-z0-9-]{6})/?$")],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/marvel.png" alt="Marvel" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "mindmeister",
+  //   title: "Mindmeister",
+  //   keywords: "mindmap",
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https://([w.-]+\\.)?(mindmeister\\.com|mm\\.tt)(/maps/public_map_shell)?/(\\d+)(\\?t=.*)?(/.*)?$"
+  //     ),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => {
+  //     const chartId = matches[4] + (matches[5] || "") + (matches[6] || "");
+  //     return `https://www.mindmeister.com/maps/public_map_shell/${chartId}`;
+  //   },
+  //   icon: <Img src="/images/mindmeister.png" alt="Mindmeister" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "miro",
+  //   title: "Miro",
+  //   keywords: "whiteboard",
+  //   regexMatch: [/^https:\/\/(realtimeboard|miro)\.com\/app\/board\/(.*)$/],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://${matches[1]}.com/app/embed/${matches[2]}`,
+  //   icon: <Img src="/images/miro.png" alt="Miro" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "mode",
+  //   title: "Mode",
+  //   keywords: "analytics",
+  //   defaultHidden: true,
+  //   regexMatch: [
+  //     new RegExp("^https://([w.-]+\\.)?modeanalytics\\.com/(.*)/reports/(.*)$"),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `${matches[0].replace(/\/embed$/, "")}/embed`,
+  //   icon: <Img src="/images/mode-analytics.png" alt="Mode" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "otter",
+  //   title: "Otter.ai",
+  //   keywords: "audio transcription meeting notes",
+  //   defaultHidden: true,
+  //   regexMatch: [new RegExp("^https?://otter\\.ai/[su]/(.*)$")],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/otter.png" alt="Otter.ai" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "pitch",
+  //   title: "Pitch",
+  //   keywords: "presentation",
+  //   defaultHidden: true,
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https?://app\\.pitch\\.com/app/(?:presentation/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|public/player)/(.*)$"
+  //     ),
+  //     new RegExp("^https?://pitch\\.com/embed/(.*)$"),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://pitch.com/embed/${matches[1]}`,
+  //   icon: <Img src="/images/pitch.png" alt="Pitch" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "prezi",
+  //   title: "Prezi",
+  //   keywords: "presentation",
+  //   regexMatch: [new RegExp("^https://prezi\\.com/view/(.*)$")],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `${matches[0].replace(/\/embed$/, "")}/embed`,
+  //   icon: <Img src="/images/prezi.png" alt="Prezi" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "scribe",
+  //   title: "Scribe",
+  //   keywords: "screencast",
+  //   regexMatch: [/^https?:\/\/scribehow\.com\/shared\/(.*)$/],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://scribehow.com/embed/${matches[1]}`,
+  //   icon: <Img src="/images/scribe.png" alt="Scribe" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "smartsuite",
+  //   title: "SmartSuite",
+  //   regexMatch: [
+  //     new RegExp("^https?://app\\.smartsuite\\.com/shared/(.*)(?:\\?)?(?:.*)$"),
+  //   ],
+  //   icon: <Img src="/images/smartsuite.png" alt="SmartSuite" />,
+  //   defaultHidden: true,
+  //   hideToolbar: true,
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://app.smartsuite.com/shared/${matches[1]}?embed=true&header=false&toolbar=true`,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "spotify",
+  //   title: "Spotify",
+  //   keywords: "music",
+  //   regexMatch: [new RegExp("^https?://open\\.spotify\\.com/(.*)$")],
+  //   icon: <Img src="/images/spotify.png" alt="Spotify" />,
+  //   component: Spotify,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "tella",
+  //   title: "Tella",
+  //   keywords: "video",
+  //   regexMatch: [/^https?:\/\/(?:www\.)?tella\.tv\/video\/([^\/]+)(?:.*)?$/],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://www.tella.tv/video/${matches[1]}/embed?b=0&title=1&a=0&loop=0&t=0&muted=0&wt=1`,
+  //   icon: <Img src="/images/tella.png" alt="Tella" />,
+  //   defaultHidden: true,
+  //   hideToolbar: true,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "tldraw",
+  //   title: "Tldraw",
+  //   keywords: "draw schematics diagrams",
+  //   regexMatch: [
+  //     new RegExp("^https?://(beta|www|old)\\.tldraw\\.com/[rsvopf]+/(.*)"),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/tldraw.png" alt="Tldraw" $invertable />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "trello",
+  //   title: "Trello",
+  //   keywords: "kanban",
+  //   regexMatch: [/^https:\/\/trello\.com\/(c|b)\/([^/]*)(.*)?$/],
+  //   icon: <Img src="/images/trello.png" alt="Trello" />,
+  //   component: Trello,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "typeform",
+  //   title: "Typeform",
+  //   keywords: "form survey",
+  //   regexMatch: [
+  //     new RegExp(
+  //       "^https://([A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)\\.typeform\\.com/to/(.*)$"
+  //     ),
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) => matches[0],
+  //   icon: <Img src="/images/typeform.png" alt="Typeform" $invertable />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "valtown",
+  //   title: "Valtown",
+  //   keywords: "code",
+  //   regexMatch: [/^https?:\/\/(?:www.)?val\.town\/(?:v|embed)\/(.*)$/],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://www.val.town/embed/${matches[1]}`,
+  //   icon: <Img src="/images/valtown.png" alt="Valtown" $invertable />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "vimeo",
+  //   title: "Vimeo",
+  //   keywords: "video",
+  //   regexMatch: [
+  //     /(http|https)?:\/\/(www\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^/]*)\/videos\/|)(\d+)(?:\/|\?)?([\d\w]+)?/,
+  //   ],
+  //   icon: <Img src="/images/vimeo.png" alt="Vimeo" />,
+  //   component: Vimeo,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "pinterest",
+  //   title: "Pinterest",
+  //   keywords: "board moodboard pins",
+  //   regexMatch: [
+  //     // Match board URLs but exclude pins
+  //     /^(?:https?:\/\/)?(?:(?:www\.|[a-z]{2}\.)?pinterest\.(?:com|[a-z]{2,3}))\/(?!pin\/)([^/]+)\/([^/]+)\/?$/,
+  //     // Match profile URLs but exclude pins
+  //     /^(?:https?:\/\/)?(?:(?:www\.|[a-z]{2}\.)?pinterest\.(?:com|[a-z]{2,3}))\/(?!pin\/)([^/]+)\/?$/,
+  //   ],
+  //   icon: <Img src="/images/pinterest.png" alt="Pinterest" />,
+  //   component: Pinterest,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "whimsical",
+  //   title: "Whimsical",
+  //   keywords: "whiteboard",
+  //   regexMatch: [
+  //     /^https?:\/\/whimsical\.com\/[0-9a-zA-Z-_~]*-([a-zA-Z0-9]+)\/?$/,
+  //   ],
+  //   transformMatch: (matches: RegExpMatchArray) =>
+  //     `https://whimsical.com/embed/${matches[1]}`,
+  //   icon: <Img src="/images/whimsical.png" alt="Whimsical" />,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "youtube",
+  //   title: "YouTube",
+  //   keywords: "google video",
+  //   regexMatch: [
+  //     /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([a-zA-Z0-9_-]{11})([\&\?](.*))?$/i,
+  //   ],
+  //   icon: <Img src="/images/youtube.png" alt="YouTube" />,
+  //   component: YouTube,
+  // }),
+  // new EmbedDescriptor({
+  //   id: "plant-uml",
+  //   title: "Plant UML",
+  //   keywords: "plant plantuml uml",
+  //   regexMatch: [
+  //     /(?:https?:\/\/)?(?:www\.)?editor\.plantuml\.com\/uml\/([a-zA-Z0-9\-_]+)([\&\?].*)?$/i,
+  //   ],
+  //   icon: <Img src="/images/plantuml.png" alt="PlantUml" />,
+  //   component: PlantUmlDiagrams,
+  // }),
   /* The generic iframe embed should always be the last one */
   new EmbedDescriptor({
     id: "embed",
