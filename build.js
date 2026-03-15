@@ -31,9 +31,9 @@ async function build() {
   console.log("Clean previous build…");
 
   await Promise.all([
-    execAsync("rm -rf ./build/server"),
-    execAsync("rm -rf ./build/plugins"),
-  ]);
+    execAsync("rmdir /s /q .\\build\\server"),
+    execAsync("rmdir /s /q .\\build\\plugins"),
+  ]).catch(() => {});
 
   const d = getDirectories("./plugins");
 
@@ -41,10 +41,10 @@ async function build() {
   console.log("Compiling…");
   await Promise.all([
     execAsync(
-      "yarn babel --extensions .ts,.tsx --quiet -d ./build/server ./server"
+      "yarn babel --extensions .ts,.tsx --quiet -d .\\build\\server .\\server"
     ),
     execAsync(
-      "yarn babel --extensions .ts,.tsx --quiet -d ./build/shared ./shared"
+      "yarn babel --extensions .ts,.tsx --quiet -d .\\build\\shared .\\shared"
     ),
   ]);
 
@@ -53,7 +53,7 @@ async function build() {
 
     if (hasServer) {
       await execAsync(
-        `yarn babel --extensions .ts,.tsx --quiet -d "./build/plugins/${plugin}/server" "./plugins/${plugin}/server"`
+        `yarn babel --extensions .ts,.tsx --quiet -d ".\\build\\plugins\\${plugin}\\server" ".\\plugins\\${plugin}\\server"`
       );
     }
 
@@ -61,7 +61,7 @@ async function build() {
 
     if (hasShared) {
       await execAsync(
-        `yarn babel --extensions .ts,.tsx --quiet -d "./build/plugins/${plugin}/shared" "./plugins/${plugin}/shared"`
+        `yarn babel --extensions .ts,.tsx --quiet -d ".\\build\\plugins\\${plugin}\\shared" ".\\plugins\\${plugin}\\shared"`
       );
     }
   }
@@ -70,19 +70,21 @@ async function build() {
   console.log("Copying static files…");
   await Promise.all([
     execAsync(
-      "cp ./server/collaboration/Procfile ./build/server/collaboration/Procfile"
+      "copy .\\server\\collaboration\\Procfile .\\build\\server\\collaboration\\Procfile"
     ),
     execAsync(
-      "cp ./server/static/error.dev.html ./build/server/error.dev.html"
+      "copy .\\server\\static\\error.dev.html .\\build\\server\\error.dev.html"
     ),
     execAsync(
-      "cp ./server/static/error.prod.html ./build/server/error.prod.html"
+      "copy .\\server\\static\\error.prod.html .\\build\\server\\error.prod.html"
     ),
-    execAsync("cp package.json ./build"),
+    execAsync("copy package.json .\\build"),
     ...d.map(async (plugin) =>
       execAsync(
-        `mkdir -p ./build/plugins/${plugin} && cp ./plugins/${plugin}/plugin.json ./build/plugins/${plugin}/plugin.json 2>/dev/null || :`
-      )
+        `mkdir .\\build\\plugins\\${plugin} & copy .\\plugins\\${plugin}\\plugin.json .\\build\\plugins\\${plugin}\\plugin.json`
+      ).catch((e) => {
+        console.error(e);
+      })
     ),
   ]);
 

@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build",
-    "copy:i18n": "mkdir -p ./build/shared/i18n && cp -R ./shared/i18n/locales ./build/shared/i18n",
+    "copy:i18n": "if not exist .\\build\\shared\\i18n mkdir .\\build\\shared\\i18n && xcopy /E /I /Y .\\shared\\i18n\\locales .\\build\\shared\\i18n\\locales",
     "build:i18n": "i18next --silent '{shared,app,server,plugins}/**/*.{ts,tsx}' && yarn copy:i18n",
     "build:server": "node ./build.js",
     "build": "yarn clean && yarn vite:build && yarn build:i18n && yarn build:server",
     "start": "node ./build/server/index.js",
-    "dev": "NODE_ENV=development yarn concurrently -n api,collaboration  -c \"blue,magenta\" \"node --inspect=0.0.0.0 build/server/index.js --services=cron,collaboration,websockets,admin,web,worker\"",
     "dev:backend": "NODE_ENV=development nodemon --quiet --exec \"yarn build:server && yarn dev\" -e js,ts,tsx --watch server --watch shared --watch plugins --watch .env --watch .env.local --watch .env.development --ignore \"shared/components/**/*.tsx?\" --ignore \"plugins/client/**/*.tsx?\" --ignore \"**/*.test.ts\" --ignore data/ --ignore build/ --ignore app/ --ignore shared/editor --ignore server/migrations",
     "dev:watch": "NODE_ENV=development yarn concurrently -n backend,frontend \"yarn dev:backend\" \"yarn vite:dev\"",
     "lint": "oxlint --type-aware app server shared plugins",
@@ -32,9 +31,9 @@
     "test:app": "TZ=UTC jest --config=.jestconfig.json --selectProjects app",
     "test:shared": "TZ=UTC jest --config=.jestconfig.json --selectProjects shared-node shared-jsdom",
     "test:server": "TZ=UTC jest --config=.jestconfig.json --selectProjects server",
-    "vite:dev": "VITE_CJS_IGNORE_WARNING=true vite",
-    "vite:build": "VITE_CJS_IGNORE_WARNING=true vite build",
-    "vite:preview": "VITE_CJS_IGNORE_WARNING=true vite preview"
+    "vite:dev": "cross-env VITE_CJS_IGNORE_WARNING=true vite",
+    "vite:build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
+    "vite:preview": "cross-env VITE_CJS_IGNORE_WARNING=true vite preview"
   },
   "funding": {
     "type": "GitHub Sponsors ❤",
@@ -357,6 +356,7 @@
     "babel-plugin-tsconfig-paths-module-resolver": "^1.0.4",
     "browserslist-to-esbuild": "^1.2.0",
     "concurrently": "^8.2.2",
+    "cross-env": "^10.1.0",
     "discord-api-types": "^0.38.36",
     "husky": "^8.0.3",
     "i18next-parser": "^8.13.0",
@@ -373,6 +373,7 @@
     "react-refresh": "^0.18.0",
     "rimraf": "^2.5.4",
     "rollup-plugin-webpack-stats": "2.1.6",
+    "sass-embedded": "^1.98.0",
     "terser": "^5.44.1",
     "typescript": "^5.9.2"
   },
@@ -392,6 +393,5 @@
     "cheerio": "1.0.0-rc.12",
     "zod": "^4.2.1"
   },
-  "version": "1.5.0",
-  "packageManager": "yarn@4.11.0"
+  "version": "1.5.0"
 }
